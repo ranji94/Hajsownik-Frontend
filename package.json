@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "antd": "^3.18.1",
+    "axios": "^0.18.0",
+    "body-style": "^0.3.0",
+    "formik": "^1.5.4",
+    "history": "^4.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "react-select": "^2.4.3",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
