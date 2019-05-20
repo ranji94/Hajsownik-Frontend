@@ -25,7 +25,7 @@ handleValueChange(event){
 }
 
 componentDidMount(){
-    const API = "http://localhost:8080";
+    const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'GET', headers: authHeader() };
 
     axios.get(API+"/items/getall", requestOptions)
@@ -38,12 +38,14 @@ componentDidMount(){
 addItemToList(e){
   if(this.state.selectedOption != null){
   e.preventDefault();
-  const API = "http://localhost:8080";
+  const API = "https://hajsownik.herokuapp.com";
   const requestOptions = { method: 'PUT', mode: "cors", headers: authHeader() };
   console.log("Powiązano obiekt z listą")
 
-  fetch(API+"/shopping/"+this.props.shoppinglistid+"/item/"+this.state.selectedOption.value+"/quantity/"+this.state.quantity, requestOptions);
-  window.location.reload();
+  fetch(API+"/shopping/"+this.props.shoppinglistid+"/item/"+this.state.selectedOption.value+"/quantity/"+this.state.quantity, requestOptions)
+    .then(res =>{
+      window.location.reload();
+    })
   }
 }
 

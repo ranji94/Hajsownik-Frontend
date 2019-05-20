@@ -11,7 +11,7 @@ export class SignUp extends React.Component{
     }
 
     signUp(username, password){
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }) };
 

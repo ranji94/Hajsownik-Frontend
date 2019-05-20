@@ -11,7 +11,7 @@ constructor(){
     }
 
     componentDidMount() {
-    const API = "http://localhost:8080";
+    const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'GET', headers: authHeader() };
 
     axios.get(API+"/shopping", requestOptions)
@@ -24,7 +24,7 @@ constructor(){
     deleteList = (index, e, listid) => {
         e.preventDefault();
         const shoppingLists = Object.assign([], this.state.shoppingLists);
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'DELETE', mode: "cors", headers: authHeader()};
         console.log("Usunięto listę z serwera:"+shoppingLists[index].id);
         axios.delete(`${API}/shopping/${shoppingLists[index].id}`, requestOptions)
@@ -38,11 +38,13 @@ constructor(){
 
     createList(e){
         e.preventDefault();
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'POST', headers: authHeader() };
         console.log("Utworzono nową listę na serwerze")
-        axios.post(API+"/shopping", {}, requestOptions);
-        window.location.reload();
+        axios.post(API+"/shopping", {}, requestOptions)
+            .then(res => {
+                window.location.reload();
+            });
     }
 
     render() {

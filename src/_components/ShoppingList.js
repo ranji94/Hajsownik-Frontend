@@ -15,7 +15,7 @@ export class ShoppingList extends React.Component{
     }
 
     componentDidMount(){
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'GET', headers: authHeader() };
 
         axios.get(API+"/shopping/"+this.props.id+"/isOwner", requestOptions)

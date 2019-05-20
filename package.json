@@ -10,6 +10,7 @@
     "body-style": "^0.3.0",
     "formik": "^1.5.4",
     "history": "^4.9.0",
+    "materialize-css": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",

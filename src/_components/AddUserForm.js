@@ -20,7 +20,7 @@ handleChange = (selectedOption) => {
 }
 
 componentDidMount(){
-    const API = "http://localhost:8080";
+    const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'GET', headers: authHeader() };
 
     axios.get(API+"/users/getall", requestOptions)
@@ -32,12 +32,15 @@ componentDidMount(){
 
 addUserToList(e){
     e.preventDefault();
-    const API = "http://localhost:8080";
+    const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'PUT', mode: "cors", headers: authHeader() };
     console.log("Powiązano obiekt z listą")
   
-    fetch(API+"/shopping/"+this.props.shoppinglistid+"/user/"+this.state.selectedOption.value, requestOptions);
-    window.location.reload();
+    fetch(API+"/shopping/"+this.props.shoppinglistid+"/user/"+this.state.selectedOption.value, requestOptions)
+        .then(res =>{
+            window.location.reload();
+        });
+    
   }
 
     render(){

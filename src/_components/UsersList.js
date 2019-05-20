@@ -10,7 +10,7 @@ export class UsersList extends React.Component {
 
     componentDidMount(){
             const listId = this.props.shoppinglistid;
-            const API = "http://localhost:8080";
+            const API = "https://hajsownik.herokuapp.com";
             var uzytkownicy = new Request(API+"/shopping/"+listId+"/users");
             const requestOptions = { method: 'GET', headers: authHeader() };
         
@@ -29,7 +29,7 @@ export class UsersList extends React.Component {
 
 
     deleteUser(userid) {
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'DELETE', mode: "cors", headers: authHeader()};
         console.log("Usunięto usera z listy:"+userid);
         axios.delete(`${API}/shopping/${this.props.shoppinglistid}/user/${userid}`, requestOptions)

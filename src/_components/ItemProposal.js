@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { authHeader } from '../_helpers/auth-header';
 import axios from 'axios';
 import { tsMethodSignature } from '@babel/types';
+import M from "materialize-css";
 
 
 export class ItemProposal extends React.Component{
@@ -14,6 +15,7 @@ export class ItemProposal extends React.Component{
     componentDidMount(){
         document.body.style.backgroundImage = 'url("")';
         document.body.style.backgroundColor = '#FFFBE3';
+        M.AutoInit();
     }
 
     handleNameChange(event){
@@ -29,7 +31,7 @@ export class ItemProposal extends React.Component{
     itemProposal(e){
         var resultElement = document.getElementById('postResult');
 
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'POST', mode: "cors", headers: authHeader()};
         resultElement.style = 'text-align: left; margin-top: 20px; padding: 20px 20px 20px 20px; border-radius: 8px; font-size: 16px'
 
@@ -70,17 +72,17 @@ export class ItemProposal extends React.Component{
                     <div className="input-field col s12">
                         <i className="material-icons prefix red-text text-lighten-1">fastfood</i>
                         <input value={this.state.name} onChange={this.handleNameChange.bind(this)} placeholder="Banany" id="nazwa_produktu" type="text" className="validate"></input>
-                        <label htmlFor="nazwa_produktu">Nazwa produktu</label>
+                        <label className="active" htmlFor="nazwa_produktu">Nazwa produktu</label>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix blue-text text-lighten-1">shopping_basket</i>
                         <input value={this.state.shop} onChange={this.handleShopChange.bind(this)} placeholder="Carrefour" id="nazwa_sklepu" type="text" className="validate"></input>
-                        <label htmlFor="nazwa_sklepu">Nazwa sklepu</label>
+                        <label className="active" htmlFor="nazwa_sklepu">Nazwa sklepu</label>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix green-text text-lighten-1">attach_money</i>
                         <input value={this.state.price} onChange={this.handlePriceChange.bind(this)} placeholder="1.20" id="cena" type="text" className="validate"></input> 
-                        <label htmlFor="cena">Cena [zł]</label>
+                        <label className="active" htmlFor="cena">Cena [zł]</label>
                     </div>
                     <div className="col s12">
                     <button onClick={(e) => {this.itemProposal(e); }} className="deep-orange lighten-1 btn waves-effect waves-light" type="submit" name="action">Wyślij

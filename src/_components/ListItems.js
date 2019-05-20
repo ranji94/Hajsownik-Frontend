@@ -14,7 +14,7 @@ export class ListItems extends React.Component{
     }
 
     componentDidMount(){
-    const API = "http://localhost:8080";
+    const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'GET', headers: authHeader() };
 
     axios.get(API+"/shopping/"+this.props.match.params.id, requestOptions)
@@ -35,7 +35,7 @@ export class ListItems extends React.Component{
     deleteItem = (index, e, listid) => {
         e.preventDefault();
         const items = Object.assign([], this.state.items);
-        const API = "http://localhost:8080";
+        const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'DELETE', mode: "cors", headers: authHeader()};
         console.log("Usunięto listę z serwera:"+items[index].id);
         axios.delete(`${API}/shopping/${this.props.match.params.id}/item/${items[index].id}`, requestOptions)
