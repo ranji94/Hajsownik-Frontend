@@ -2,15 +2,18 @@ import React from 'react';
 import { authHeader } from '../_helpers/auth-header';
 import axios from 'axios';
 import { ShoppingList } from '../_components/ShoppingList';
+import M from "materialize-css";
 
 export class ShoppingLists extends React.Component {
 constructor(){
     super();
-    this.state = { shoppingLists: [] }
+    this.state = { shoppingLists: [], currentPage: 1, listsPerPage: 10 }
     this.createList = this.createList.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
+    M.AutoInit();
     const API = "https://hajsownik.herokuapp.com";
     const requestOptions = { method: 'GET', headers: authHeader() };
 
@@ -18,6 +21,12 @@ constructor(){
         .then(res=> {
             const shoppingLists = res.data;
             this.setState({ shoppingLists });
+        });
+    }
+
+    handleClick(event){
+        this.setState({
+            currentPage: Number(event.target.id)
         });
     }
 
@@ -54,14 +63,41 @@ constructor(){
             zIndex: '7'
         }
 
+        const { shoppingLists, currentPage, listsPerPage } = this.state;
+
+        const indexOfLastList = currentPage * listsPerPage;
+        const indexOfFirstList = indexOfLastList - listsPerPage;
+        const currentLists = shoppingLists.slice(indexOfFirstList, indexOfLastList);
+
+        const renderShoppingLists = currentLists.map((list, index) =>{
+            return <li className="collection-item center" key={`list-${list.id}`}><ShoppingList id={list.id} creationdate={list.createdAt} total={list.listtotal} delEvent={this.deleteList.bind(this, index)}></ShoppingList></li>
+        });
+
+        const pageNumbers = [];
+        for(let i=1;i<=Math.ceil(shoppingLists.length/listsPerPage); i++)
+        {
+            pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            if(Math.ceil(shoppingLists.length/listsPerPage)!=1){
+            return(
+                <li><button className="btn white grey-text" key={number} id={number} onClick={ (e) => {this.handleClick(e);}}>{number}</button></li>
+            );
+            }
+            else
+            {
+                return "";
+            }
+        });
+
         return (
         <div className="container">
             <ul className="collection">
-                {this.state.shoppingLists.map((list, index) => {
-                    return <li className="collection-item center" key={`list-${list.createdAt}`}>
-                    <ShoppingList id={list.id} creationdate={list.createdAt} total={list.listtotal} delEvent={this.deleteList.bind(this, index)}></ShoppingList>
-                    </li>
-                })}
+                {renderShoppingLists}
+            </ul>
+            <ul className="pagination center" id="page-numbers">
+                {renderPageNumbers}
             </ul>
             <span className="right" style={dodajListeStyle}><button onClick={ (e) => {this.createList(e); }} className="deep-orange lighten-1 btn-floating waves-effect btn-large"><i className="fas fa-plus"></i></button></span>
         </div>

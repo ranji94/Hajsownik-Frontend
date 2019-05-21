@@ -8,6 +8,11 @@ export class Item extends React.Component{
         this.state = { itemQuantity: [] }
     }
 
+    Round(n,k){
+        var factor = Math.pow(10,k);
+        return Math.round(n*factor)/factor;
+    }
+
     componentDidMount(){
         const API = "https://hajsownik.herokuapp.com";
         const requestOptions = { method: 'GET', headers: authHeader() };
@@ -25,7 +30,7 @@ export class Item extends React.Component{
         <td>{this.props.shop}</td>
         <td>{this.props.price} zł</td>
         <td>{this.state.itemQuantity.quantity}</td>
-        <td>{this.state.itemQuantity.total} zł</td>
+        <td>{this.Round(this.state.itemQuantity.total,2)} zł</td>
         {   this.props.owner
             ? <td><button onClick={this.props.delEvent} className="btn-floating waves-effect red lighten-1"><i className="far fa-trash-alt"></i></button></td>
             : null
